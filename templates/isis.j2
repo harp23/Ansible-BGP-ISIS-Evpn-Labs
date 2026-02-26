@@ -1,0 +1,13 @@
+router isis {{ isis_process }}
+ net {{ isis_net }}
+ {{ isis_level }}
+!
+interface Loopback0
+ isis {{ isis_process }}
+ passive
+!
+{% for ifname in core_ifaces | default([]) %}
+interface {{ ifname }}
+ isis {{ isis_process }}
+!
+{% endfor %}

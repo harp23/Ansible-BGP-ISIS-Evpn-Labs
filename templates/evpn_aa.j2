@@ -1,0 +1,15 @@
+evpn
+ evi {{ evpn_evi }}
+  route-target import {{ rt_import }}
+  route-target export {{ rt_export }}
+!
+interface {{ aa_bundle_interface }}
+ evpn ethernet-segment
+  identifier {{ esi }}
+  redundancy all-active
+!
+l2vpn
+ bridge group {{ bridge_group }}
+  bridge-domain BD{{ evpn_evi }}
+   interface {{ aa_bundle_interface }}
+    evi {{ evpn_evi }}

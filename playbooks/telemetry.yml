@@ -1,0 +1,8 @@
+---
+- name: Configure model-driven telemetry to Grafana/collector
+  hosts: pe
+  gather_facts: no
+  tasks:
+    - name: Push telemetry destination and subscription
+      cisco.iosxr.iosxr_config:
+        src: templates/telemetry.j2

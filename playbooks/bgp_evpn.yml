@@ -1,0 +1,16 @@
+---
+- name: Configure BGP EVPN on PEs
+  hosts: pe
+  gather_facts: no
+  tasks:
+    - name: Configure BGP EVPN AF and neighbors
+      cisco.iosxr.iosxr_config:
+        src: templates/bgp_evpn.j2
+
+- name: Configure EVPN all-active multihoming on PE1/PE4
+  hosts: pe_aa
+  gather_facts: no
+  tasks:
+    - name: Configure EVPN Ethernet-Segment AA bundle
+      cisco.iosxr.iosxr_config:
+        src: templates/evpn_aa.j2

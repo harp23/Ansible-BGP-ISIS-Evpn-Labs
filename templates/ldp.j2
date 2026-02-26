@@ -1,0 +1,8 @@
+mpls ldp
+ router-id Loopback0
+!
+{% for ifname in core_ifaces | default([]) %}
+interface {{ ifname }}
+ mpls ldp
+!
+{% endfor %}
