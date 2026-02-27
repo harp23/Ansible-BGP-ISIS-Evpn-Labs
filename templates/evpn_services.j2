@@ -1,0 +1,38 @@
+evpn
+ evi {{ evpn_evi }}
+  bgp
+   rd auto
+  !
+  bgp
+   route-target import {{ rt_import }}
+   route-target export {{ rt_export }}
+  !
+  advertise-mac
+ !
+!
+{% if aa_bundle_interface is defined %}
+interface {{ ce_physical_interface }}
+ bundle id 1 mode active
+ no shutdown
+!
+interface {{ aa_bundle_interface }}
+ lacp system-id 0001.0001.0001
+ evpn
+  ethernet-segment
+   type 1
+   load-balancing-mode all-active
+  !
+ !
+!
+{% endif %}
+l2vpn
+ bridge group {{ bridge_group }}
+  bridge-domain BD{{ evpn_evi }}
+   interface {{ aa_bundle_interface if aa_bundle_interface is defined else ce_interface }}
+   !
+   evi {{ evpn_evi }}
+   !
+  !
+ !
+!
+root

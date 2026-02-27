@@ -7,10 +7,10 @@ telemetry model-driven
  !
  sensor-group EVPN_MONITOR
   sensor-path Cisco-IOS-XR-l2vpn-oper:l2vpn-forwarding/nodes/node/l2vpn-bridge-domain-summaries
-  sensor-path Cisco-IOS-XR-management-pma-oper:performance-management/nodes/node/interface/generic-counters
+  sensor-path Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
  !
  subscription BASE_LINE
   sensor-group-id EVPN_MONITOR sample-interval 30000
   destination-id GRAFANA
  !
-root
+!

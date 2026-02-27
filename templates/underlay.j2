@@ -23,3 +23,15 @@ router isis {{ isis_process }}
  !
  {% endfor %}
 !
+mpls ldp
+ router-id {{ loopback_ip }}
+ address-family ipv4
+ !
+ interface Loopback0
+ !
+ {% for iface in core_ifaces %}
+ interface {{ iface.name }}
+ !
+ {% endfor %}
+!
+root

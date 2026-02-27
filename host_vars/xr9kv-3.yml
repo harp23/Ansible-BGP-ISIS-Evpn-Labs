@@ -2,4 +2,10 @@
 loopback_ip: "1.1.1.11"
 isis_net: "49.0001.0000.0000.0011.00"
 role: "P"
-core_ifaces: ["GigabitEthernet0/0/0/0", "GigabitEthernet0/0/0/1", "GigabitEthernet0/0/0/2"]
+core_ifaces:
+  - name: "GigabitEthernet0/0/0/0"
+    ip: "10.0.0.9/30"
+  - name: "GigabitEthernet0/0/0/1"
+    ip: "10.0.0.6/30"
+  - name: "GigabitEthernet0/0/0/2"
+    ip: "10.0.0.2/30"

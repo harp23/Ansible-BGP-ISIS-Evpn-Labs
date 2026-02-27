@@ -1,26 +1,22 @@
 ---
-- name: "Deploy Foundation EVPN Lab"
+- name: Deploy Foundation EVPN Lab
   hosts: all
   gather_facts: false
   tasks:
-    - name: "1. Configure Underlay"
+    - name: 1. Configure Underlay (IPs, ISIS, LDP)
       cisco.iosxr.iosxr_config:
-        src: "../templates/{{ item }}"
-      loop:
-        - "isis.j2"
-        - "ldp.j2"
+        src: "../templates/underlay.j2"
 
-    - name: "2. Configure BGP EVPN Control Plane"
+    - name: 2. Configure BGP EVPN Control Plane
       cisco.iosxr.iosxr_config:
         src: "../templates/bgp_evpn.j2"
 
-    # Task 3 is commented out to ensure a 100% clean run for your demo
-    # - name: "3. Configure EVPN Services"
+    # - name: 3. Configure EVPN Services & Multihoming
     #   cisco.iosxr.iosxr_config:
     #     src: "../templates/evpn_services.j2"
     #   when: role == 'PE'
 
-    - name: "4. Configure Telemetry"
+    - name: 4. Configure Telemetry
       cisco.iosxr.iosxr_config:
         src: "../templates/telemetry.j2"
       when: role == 'PE'

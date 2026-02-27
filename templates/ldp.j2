@@ -5,7 +5,7 @@ mpls ldp
  interface Loopback0
  !
 {% for iface in core_ifaces %}
- interface {{ iface }}
+ interface {{ iface.name }}
  !
 {% endfor %}
-root
+!

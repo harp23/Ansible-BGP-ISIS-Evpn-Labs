@@ -1,6 +1,7 @@
 router bgp {{ bgp_as }}
  bgp router-id {{ loopback_ip }}
  address-family l2vpn evpn
+  retain route-target all
  !
 {% if role == 'PE' %}
 {% for rr in bgp_rr_nodes %}

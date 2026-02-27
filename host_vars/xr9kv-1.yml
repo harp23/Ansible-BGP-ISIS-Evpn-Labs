@@ -2,6 +2,9 @@
 loopback_ip: "1.1.1.4"
 isis_net: "49.0001.0000.0000.0004.00"
 role: "PE"
-core_ifaces: ["GigabitEthernet0/0/0/1"]
+core_ifaces:
+  - name: "GigabitEthernet0/0/0/1"
+    ip: "10.0.0.5/30"
+ce_physical_interface: "GigabitEthernet0/0/0/0"
 aa_bundle_interface: "Bundle-Ether1"
-esi: "0000.0000.0001.0001.0001"
+esi: "00.01.01.01.01.01.01.01.01.01"

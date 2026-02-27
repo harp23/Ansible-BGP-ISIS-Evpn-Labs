@@ -1,17 +1,11 @@
 ---
-- name: Configure ISIS underlay and MPLS LDP on all nodes
-  hosts: pe,core
-  gather_facts: no
+- name: Configure Underlay (IPs, ISIS, LDP)
+  hosts: all
+  gather_facts: false
   tasks:
-    - name: Build ISIS NET string from loopback
-      set_fact:
-        isis_net: "{{ isis_net_prefix }}.{{ (loopback_ip | regex_replace('\.', '')) }}.{{ isis_net_tail }}"
-
-    - name: Configure ISIS
+    - name: Push ISIS and LDP configurations
       cisco.iosxr.iosxr_config:
-        src: templates/isis.j2
-
-    - name: Configure LDP on core-facing interfaces
-      when: core_ifaces is defined and core_ifaces | length > 0
-      cisco.iosxr.iosxr_config:
-        src: templates/ldp.j2
+        src: "../templates/{{ item }}"
+      loop:
+        - isis.j2
+        - ldp.j2
