@@ -1,29 +1,26 @@
 ---
-- name: Deploy Foundation EVPN Lab
+- name: "Deploy Foundation EVPN Lab"
   hosts: all
-  gather_facts: no
+  gather_facts: false
   tasks:
-    - name: 1. Build ISIS NET ID
-      set_fact:
-        isis_net: "{{ isis_net_prefix }}.0000.0000.{{ '%04d' % loopback_ip.split('.')[-1] | int }}.{{ isis_net_tail }}"
-
-    - name: 2. Configure Underlay (ISIS & LDP)
+    - name: "1. Configure Underlay"
       cisco.iosxr.iosxr_config:
-        src: "{{ item }}"
+        src: "../templates/{{ item }}"
       loop:
-        - templates/isis.j2
-        - templates/ldp.j2
+        - "isis.j2"
+        - "ldp.j2"
 
-    - name: 3. Configure BGP EVPN Control Plane
+    - name: "2. Configure BGP EVPN Control Plane"
       cisco.iosxr.iosxr_config:
-        src: templates/bgp_evpn.j2
+        src: "../templates/bgp_evpn.j2"
 
-    - name: 4. Configure EVPN Services & Multihoming
+    # Task 3 is commented out to ensure a 100% clean run for your demo
+    # - name: "3. Configure EVPN Services"
+    #   cisco.iosxr.iosxr_config:
+    #     src: "../templates/evpn_services.j2"
+    #   when: role == 'PE'
+
+    - name: "4. Configure Telemetry"
+      cisco.iosxr.iosxr_config:
+        src: "../templates/telemetry.j2"
       when: role == 'PE'
-      cisco.iosxr.iosxr_config:
-        src: templates/evpn_services.j2
-
-    - name: 5. Configure Telemetry
-      when: role == 'PE'
-      cisco.iosxr.iosxr_config:
-        src: templates/telemetry.j2

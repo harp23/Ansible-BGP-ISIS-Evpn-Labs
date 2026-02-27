@@ -7,9 +7,13 @@ router isis {{ isis_process }}
  interface Loopback0
   address-family ipv4 unicast
    passive
+  !
  !
 {% for iface in core_ifaces %}
  interface {{ iface }}
   point-to-point
   address-family ipv4 unicast
+  !
+ !
 {% endfor %}
+root

@@ -1,0 +1,5 @@
+---
+loopback_ip: "1.1.1.12"
+isis_net: "49.0001.0000.0000.0012.00"
+role: "P"
+core_ifaces: ["GigabitEthernet0/0/0/0", "GigabitEthernet0/0/0/1"]

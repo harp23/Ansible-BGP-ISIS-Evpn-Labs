@@ -1,6 +1,0 @@
----
-loopback_ip: 1.1.1.4
-role: PE
-core_ifaces: [GigabitEthernet0/0/0/0, GigabitEthernet0/0/0/1]
-aa_bundle_interface: Bundle-Ether1
-esi: 0000.0000.0001.0001.0001

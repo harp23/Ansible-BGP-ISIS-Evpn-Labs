@@ -5,7 +5,7 @@
   "ansible.ansible.path": "${workspaceFolder}/venv/bin/ansible",
   "ansible.executionEnvironment.enabled": false,
   "ansible.validation.lint.enabled": true,
-  "ansible.validation.lint.path": "${workspaceFolder}/venv/bin/ansible-lint"
+  "ansible.validation.lint.path": "ansible-lint"
 }
 
 

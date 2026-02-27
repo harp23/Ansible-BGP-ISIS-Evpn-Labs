@@ -2,15 +2,15 @@ all:
   children:
     pe:
       hosts:
-        PE1:
-          ansible_host: 10.0.0.1
-        PE2:
-          ansible_host: 10.0.0.2
-        PE4:
-          ansible_host: 10.0.0.4
+        xr9kv-0:
+          ansible_host: 198.18.134.100
+        xr9kv-1:
+          ansible_host: 198.18.134.101
+        xr9kv-2:
+          ansible_host: 198.18.134.102
     core:
       hosts:
-        P1:
-          ansible_host: 10.0.0.11
-        P2:
-          ansible_host: 10.0.0.12
+        xr9kv-3:
+          ansible_host: 198.18.134.103
+        xr9kv-4:
+          ansible_host: 198.18.134.104

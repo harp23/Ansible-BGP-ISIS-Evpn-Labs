@@ -1,8 +1,11 @@
 mpls ldp
- router-id Loopback0
-!
-{% for ifname in core_ifaces | default([]) %}
-interface {{ ifname }}
- mpls ldp
-!
+ router-id {{ loopback_ip }}
+ address-family ipv4
+ !
+ interface Loopback0
+ !
+{% for iface in core_ifaces %}
+ interface {{ iface }}
+ !
 {% endfor %}
+root

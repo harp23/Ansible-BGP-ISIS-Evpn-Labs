@@ -1,6 +1,12 @@
 ---
+ansible_connection: network_cli
+ansible_network_os: cisco.iosxr.iosxr
+ansible_user: cisco
+ansible_password: cisco
+
 bgp_as: 65000
 bgp_rr_nodes: [1.1.1.11, 1.1.1.12]
+
 evpn_evi: 100
 bridge_group: EVPN_FABRIC
 rt_import: "65000:100"
@@ -11,9 +17,6 @@ isis_level: level-2-only
 isis_net_prefix: "49.0001"
 isis_net_tail: "00"
 
-telemetry_dst_ip: 192.168.100.50
+telemetry_dst_ip: 198.18.133.252 
 telemetry_dst_port: 57000
 telemetry_protocol: grpc
-
-ansible_network_os: cisco.iosxr.iosxr
-ansible_connection: network_cli
