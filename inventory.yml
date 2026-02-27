@@ -1,4 +1,3 @@
----
 all:
   children:
     pe:
@@ -15,7 +14,3 @@ all:
           ansible_host: 10.0.0.11
         P2:
           ansible_host: 10.0.0.12
-    pe_aa:   # PEs participating in all-active multihoming toward CE1
-      hosts:
-        PE1:
-        PE4:

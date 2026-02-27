@@ -1,0 +1,29 @@
+---
+- name: Deploy Foundation EVPN Lab
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: 1. Build ISIS NET ID
+      set_fact:
+        isis_net: "{{ isis_net_prefix }}.0000.0000.{{ '%04d' % loopback_ip.split('.')[-1] | int }}.{{ isis_net_tail }}"
+
+    - name: 2. Configure Underlay (ISIS & LDP)
+      cisco.iosxr.iosxr_config:
+        src: "{{ item }}"
+      loop:
+        - templates/isis.j2
+        - templates/ldp.j2
+
+    - name: 3. Configure BGP EVPN Control Plane
+      cisco.iosxr.iosxr_config:
+        src: templates/bgp_evpn.j2
+
+    - name: 4. Configure EVPN Services & Multihoming
+      when: role == 'PE'
+      cisco.iosxr.iosxr_config:
+        src: templates/evpn_services.j2
+
+    - name: 5. Configure Telemetry
+      when: role == 'PE'
+      cisco.iosxr.iosxr_config:
+        src: templates/telemetry.j2

@@ -1,6 +1,4 @@
 ---
 loopback_ip: 1.1.1.11
 role: P
-core_ifaces:
-  - GigabitEthernet0/0/0/0
-  - GigabitEthernet0/0/0/1
+core_ifaces: [GigabitEthernet0/0/0/0, GigabitEthernet0/0/0/1]

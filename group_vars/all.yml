@@ -1,28 +1,19 @@
 ---
-# Global defaults to keep the lab flexible
 bgp_as: 65000
-
-# EVPN defaults
+bgp_rr_nodes: [1.1.1.11, 1.1.1.12]
 evpn_evi: 100
-rt_import: "100:100"
-rt_export: "100:100"
-bridge_group: EVPN
+bridge_group: EVPN_FABRIC
+rt_import: "65000:100"
+rt_export: "65000:100"
 
-# Underlay / IGP defaults
 isis_process: CORE
 isis_level: level-2-only
-# Build a valid NET ID from loopback; you may override per-host if desired
 isis_net_prefix: "49.0001"
 isis_net_tail: "00"
 
-# Telemetry / gRPC dial-out (point this to your collector/Telegraf)
 telemetry_dst_ip: 192.168.100.50
 telemetry_dst_port: 57000
 telemetry_protocol: grpc
 
-# XR connection defaults (override in inventory if different)
-ansible_network_os: iosxr
+ansible_network_os: cisco.iosxr.iosxr
 ansible_connection: network_cli
-# Set your device login username here or in ansible.cfg (remote_user)
-# ansible_user: YOUR_USERNAME
-# ansible_password: YOUR_PASSWORD  # (discouraged; prefer SSH keys)

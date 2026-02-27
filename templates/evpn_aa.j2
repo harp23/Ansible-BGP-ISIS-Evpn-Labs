@@ -1,15 +1,22 @@
 evpn
  evi {{ evpn_evi }}
-  route-target import {{ rt_import }}
-  route-target export {{ rt_export }}
-!
+  bgp
+   rd auto
+   route-target import {{ rt_import }}
+   route-target export {{ rt_export }}
+ !
+{% if aa_bundle_interface is defined %}
 interface {{ aa_bundle_interface }}
- evpn ethernet-segment
-  identifier {{ esi }}
-  redundancy all-active
-!
+ ethernet-segment
+  identifier type 0 {{ esi }}
+  load-balancing mode all-active
+ !
+ lacp system priority 32768
+ lacp system identifier {{ esi.split('.')[2] }}.{{ esi.split('.')[3] }}.{{ esi.split('.')[4] }}
+{% endif %}
+
 l2vpn
  bridge group {{ bridge_group }}
   bridge-domain BD{{ evpn_evi }}
-   interface {{ aa_bundle_interface }}
+   interface {{ aa_bundle_interface if aa_bundle_interface is defined else ce_interface }}
     evi {{ evpn_evi }}

@@ -1,19 +1,23 @@
 router bgp {{ bgp_as }}
  bgp router-id {{ loopback_ip }}
- !
  address-family l2vpn evpn
   retain route-target all
  !
-{% for peer in groups['pe'] if peer != inventory_hostname %}
- neighbor {{ hostvars[peer].loopback_ip }}
+{% if role == 'PE' %}
+ {% for rr in bgp_rr_nodes %}
+ neighbor {{ rr }}
   remote-as {{ bgp_as }}
   update-source Loopback0
   address-family l2vpn evpn
    send-community both
-{% endfor %}
-!
-# Minimal EVPN EVI context (extend as needed)
-l2vpn evpn
- evi {{ evpn_evi }}
-  route-target import {{ rt_import }}
-  route-target export {{ rt_export }}
+ {% endfor %}
+{% elif role == 'P' %}
+ {% for peer in groups['pe'] %}
+ neighbor {{ hostvars[peer].loopback_ip }}
+  remote-as {{ bgp_as }}
+  update-source Loopback0
+  address-family l2vpn evpn
+   route-reflector-client
+   send-community both
+ {% endfor %}
+{% endif %}
