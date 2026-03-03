@@ -4,17 +4,17 @@ router bgp {{ bgp_as }}
   retain route-target all
  !
 {% if role == 'PE' %}
-{% for rr in bgp_rr_nodes %}
+ {% for rr in bgp_rr_nodes %}
  neighbor {{ rr }}
   remote-as {{ bgp_as }}
   update-source Loopback0
   address-family l2vpn evpn
   !
  !
-{% endfor %}
+ {% endfor %}
 {% endif %}
 {% if role == 'P' %}
-{% for peer in groups['pe'] %}
+ {% for peer in groups['pe'] %}
  neighbor {{ hostvars[peer].loopback_ip }}
   remote-as {{ bgp_as }}
   update-source Loopback0
@@ -22,6 +22,5 @@ router bgp {{ bgp_as }}
    route-reflector-client
   !
  !
-{% endfor %}
+ {% endfor %}
 {% endif %}
-root

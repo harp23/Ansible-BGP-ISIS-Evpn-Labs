@@ -7,9 +7,15 @@ interface {{ iface.name }}
  no shutdown
 !
 {% endfor %}
+{% if ce_interface is defined %}
+interface {{ ce_interface }}
+ ipv4 address {{ ce_ip }}
+ no shutdown
+!
+{% endif %}
 router isis {{ isis_process }}
- is-type {{ isis_level }}
  net {{ isis_net }}
+ is-type level-2-only
  address-family ipv4 unicast
   metric-style wide
  !
@@ -22,6 +28,11 @@ router isis {{ isis_process }}
   address-family ipv4 unicast
  !
  {% endfor %}
+ {% if ce_interface is defined %}
+ interface {{ ce_interface }}
+  address-family ipv4 unicast
+ !
+ {% endif %}
 !
 mpls ldp
  router-id {{ loopback_ip }}
@@ -34,4 +45,3 @@ mpls ldp
  !
  {% endfor %}
 !
-root

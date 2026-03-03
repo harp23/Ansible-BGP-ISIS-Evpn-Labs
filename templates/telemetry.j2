@@ -1,16 +1,16 @@
 telemetry model-driven
- destination-group GRAFANA
+ destination-group D1
   address-family ipv4 {{ telemetry_dst_ip }} port {{ telemetry_dst_port }}
    encoding self-describing-gpb
-   protocol {{ telemetry_protocol }}
+   protocol tcp
+   vrf mgmt
   !
  !
- sensor-group EVPN_MONITOR
-  sensor-path Cisco-IOS-XR-l2vpn-oper:l2vpn-forwarding/nodes/node/l2vpn-bridge-domain-summaries
+ sensor-group S1
   sensor-path Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
  !
- subscription BASE_LINE
-  sensor-group-id EVPN_MONITOR sample-interval 30000
-  destination-id GRAFANA
+ subscription SUB1
+  sensor-group-id S1 sample-interval 10000
+  destination-id D1
+  source-interface MgmtEth0/RP0/CPU0/0
  !
-!

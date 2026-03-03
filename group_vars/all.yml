@@ -12,11 +12,13 @@ bridge_group: EVPN_FABRIC
 rt_import: "65000:100"
 rt_export: "65000:100"
 
+# Underlay / IGP (IS-IS)
 isis_process: CORE
 isis_level: level-2-only
 isis_net_prefix: "49.0001"
 isis_net_tail: "00"
 
-telemetry_dst_ip: 198.18.133.252 
+# Telemetry (Points to your Ubuntu Server)
+telemetry_dst_ip: 198.18.134.50 
 telemetry_dst_port: 57000
-telemetry_protocol: grpc
+telemetry_protocol: tcp
