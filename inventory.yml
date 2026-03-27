@@ -14,3 +14,17 @@ all:
           ansible_host: 198.18.134.103
         xr9kv-4:
           ansible_host: 198.18.134.104
+    switches:
+      hosts:
+        iosvl2-0:
+          ansible_host: 198.18.134.105
+        iosvl2-1:
+          ansible_host: 198.18.134.106
+    servers:
+      hosts:
+        alpine-0:
+          ansible_host: 198.18.134.107
+        alpine-1:
+          ansible_host: 198.18.134.108
+        mgmt-srv:
+          ansible_host: 198.18.134.50
