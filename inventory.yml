@@ -23,8 +23,8 @@ all:
     servers:
       hosts:
         alpine-0:
-          ansible_host: 198.18.134.107
+          ansible_host: 192.168.10.2
         alpine-1:
-          ansible_host: 198.18.134.108
+          ansible_host: 192.168.20.2
         mgmt-srv:
           ansible_host: 198.18.134.50
